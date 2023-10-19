@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  mobileNumber</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            text-align: left;
+            display: flex;
+        
+            height: 100vh;
+            margin: 0;
+        }
+
+        
+
+        .input-group {
+            margin: 10px 0;
+            display: flex;
+            
+        }
+
+        .input-group label {
+            width: 40%;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        
+        
+        .input-group input#country-code {
+            width: 15%; /* Space for 2 digits */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            
+        }
+
+        .input-group input#mobile-number {
+            width: 90%; /* Space for 10 digits */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            
+        }
+
+        .submit-button {
+            background-color: purple;;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+         /*logo*/
+         .logo{
+            position: absolute;
+             top: 10px;
+            left: 10px;
+            height: 50px;
+            width: 50px;
+         }
+         .logo-filtered{
+            filter: hue-rotate(120deg);
+            
+         }
+         .header-container{
+            position: relative;
+         }
+         h1{
+            color: purple;
+            top: 50px;
+            margin-left: 15%;
+         }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <img src="logo.jpg" alt="Logo" class="logo logo-filtered">
+        <h1>TexlaCulture</h1>
+         <div class="container">
+        <h2> Mobile Number</h2>
+        <p>We'll send you a one-time varification code.</p>
+        <form id="otp-form" onsubmit="generateOTP(); return false;">
+            <div class="input-group">
+                <label for="country-code">
+                <input type="text" id="country-code" placeholder="+1" required>
+                </label>
+                
+                <input type="text" id="mobile-number" placeholder="Enter your mobile number" required>
+            
+            </div>
+            <p>By continuing, I agree to the <a href="#">terms of Use & privacy policy</a></p>
+            
+            <button class="submit-button" type="submit">Get OTP</button>
+        </form>
+        <p>Having trouble logging in?<a href="#">Get Help</a> </p>
+        </div>
+    </div>
+     </div>
+    <script>
+        function generateOTP() {
+            const countryCode = document.getElementById('country-code').value;
+            const mobileNumber = document.getElementById('mobile-number').value;
+
+            // Simulate generating and sending OTP
+            const otp = Math.floor(1000 + Math.random() * 9000); // Generate a random 4-digit OTP
+
+            // In a real application, you would send the OTP to the user's mobile number using an SMS or other method.
+            alert(`OTP sent to ${countryCode}${mobileNumber}: ${otp}`);
+            // Redirect to OTP verification page after sending OTP
+            window.location.href = 'varify.html';
+        }
+        
+        
+    </script>
+</body>
+</html>

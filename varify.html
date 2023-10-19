@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            background-color: rgb(247, 240, 247);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: rgb(14, 13, 13);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start; /* Align to the left */
+            align-items: flex-start; /* Align to the top */
+            min-height: 100vh;
+        }
+
+
+        .otp-input {
+            width: 50px;
+            height: 40px;
+            border: 2px solid #0a0a0a; /* White border */
+            border-radius: 7px;
+            font-size: 20px;
+            margin: 0 10px;
+            text-align: center;
+            color: rgb(19, 19, 19);
+            background-color: rgba(253, 248, 248, 0.2); /* Semi-transparent white background */
+        }
+         h1 {
+            color: purple;
+            top: 50px;
+            margin-left: 0;
+            
+         }
+         /*logo*/
+         .logo{
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            height: 50px;
+            width: 50px;
+         }
+         .logo-filtered{
+            filter: hue-rotate(120deg);
+         }
+         .header-container{
+            position: relative;
+         }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+    <img src="logo.jpg" alt="Logo" class="logo logo-filtered">
+    </div>
+    <div class ="container">
+        
+    <h1>TexlaCulture</h1>
+    
+        <h2>Varify your Mobile Number</h2>
+        
+        <div>
+            <p id="message"></p>
+            
+            <div id="contact-number">
+                please enter code sent to your mobile number ending with 
+                <span id="masked-number"></span>
+            
+            </div>    
+            <input
+                class="otp-input"
+                type="text"
+                maxlength="1"
+                id="input1"
+                oninput="moveToNextInput(this, 'input2')"
+            />
+            <input
+                class="otp-input"
+                type="text"
+                maxlength="1"
+                id="input2"
+                oninput="moveToNextInput(this, 'input3')"
+            />
+            <input
+                class="otp-input"
+                type="text"
+                maxlength="1"
+                id="input3"
+                oninput="moveToNextInput(this, 'input4')"
+            />
+            <input
+                class="otp-input"
+                type="text"
+                maxlength="1"
+                id="input4"
+                oninput="verifyOTP()"
+            />
+            <p>didn't get OTP pls:<a href class="submit-button" onclick="resendOTP()" title="Resend OTP">Resend OTP</a></p>
+        
+    </div>
+
+    <script>
+        function moveToNextInput(currentInput, nextInputId) {
+            if (currentInput.value.length === 1) {
+                document.getElementById(nextInputId).focus();
+            }
+        }
+
+        function verifyOTP() {
+            // Replace '1234' with the actual OTP that should be verified
+            const enteredOTP =
+                document.getElementById('input1').value +
+                document.getElementById('input2').value +
+                document.getElementById('input3').value +
+                document.getElementById('input4').value;
+            const actualOTP = '1234';
+
+            if (enteredOTP === actualOTP) {
+                document.getElementById('message').innerHTML =
+                    'OTP Verified. You can proceed.';
+            } else {
+                document.getElementById('message').innerHTML =
+                    'Invalid OTP. Please try again.';
+            }
+        }
+
+        function resendOTP() {
+            // Simulate OTP resending
+            document.getElementById('message').innerHTML = ''; // Clear previous message
+            document.getElementById('message').innerHTML =
+                'Resending OTP... Check your mobile or email for the new OTP.';
+        }
+        function generateOTP() {
+            // Replace this with your OTP generation logic
+            const newOTP = Math.floor(1000 + Math.random() * 9000);
+
+            // Display the new OTP
+            document.getElementById('otp-code').textContent = newOTP;
+        }
+
+        // Add a click event listener to the "Resend OTP" button
+        document.getElementById('resend-otp-button').addEventListener('click', generateOTP);
+
+        // Initial OTP generation
+        generateOTP();
+
+        
+    
+
+        // Function to mask the contact number
+        function maskContactNumber(number) {
+            const maskedNumber = number.substring(0, number.length - 4) + '****';
+            return maskedNumber;
+        }
+
+        // Display the masked contact number
+        const maskedNumberElement = document.getElementById('masked-number');
+        maskedNumberElement.textContent = maskContactNumber(actualNumber);
+    </script>
+    
+</body>
+</html>
